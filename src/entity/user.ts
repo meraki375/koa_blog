@@ -24,13 +24,13 @@ export class User {
   })
   phone: string;
   
-  @Column("double")
+  @Column("double",{default:1})
   status: number; 
 
   @CreateDateColumn()
   createAt: Date;
 
-  @Column("double")
+  @Column("double",{default:0})
   sex: number;
   // @Column()
   // registrationDate: string;

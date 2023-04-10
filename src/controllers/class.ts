@@ -22,7 +22,7 @@ export default class ClassController {
       .getMany();
     ctx.status = 200;
     ctx.body = { 
-      success:200,
+      code:200,
       message:'查询成功',
       count:classes.length,
       list:classlist
@@ -40,52 +40,49 @@ export default class ClassController {
   //   }
   // }
   
-  // public static async updateUser(ctx: Context) {
-  //   const userRepository = getManager().getRepository(Class);
-  //   const userId = ctx.request.body.id;
-  //   console.log(userId);
-    
-  //   //新增
-  //   if (!userId) {
-  //     const newUser = new Class();
-  //     newUser.username = ctx.request.body.username;
-  //     newUser.email = ctx.request.body.email;
-  //     newUser.phone = ctx.request.body.phone;
-  //     newUser.avatar = ctx.request.body.avatar;
-  //     newUser.status = ctx.request.body.status;
-  //     newUser.sex = ctx.request.body.sex;
-  //     newUser.password = await argon2.hash(ctx.request.body.password);
-  //     const user = await userRepository.save(newUser);  
-  //     return ctx.body = {
-  //       success:201,
-  //       message:'新增成功', 
-  //       user
-  //     };
-  //   } 
-  //   //修改
-  //   await userRepository.update(+userId, ctx.request.body);
-  //   const updatedUser = await userRepository.findOneBy({id:userId}); 
-  //   if (updatedUser) { 
-  //     return ctx.body = {
-  //       success:201,
-  //       message:'修改成功', 
-  //       updatedUser
-  //     };
-  //   }
-  //   return ctx.body = {
-  //     success:501,
-  //     message:'修改失败', 
-  //     updatedUser
-  //   };
-  // }
+  public static async updateClass(ctx: Context) {
+    const repository = getManager().getRepository(Class);
+    const classId = ctx.request.body.id;
+    const findname = await repository.findOneBy({name:ctx.params.name});
+    if(findname){
+      return ctx.body = {
+        code:501,
+        message:'分类名重复'
+      };
+    }
+    //新增
+    if (!classId) {
+      const data = new Class();
+      data.name = ctx.request.body.name;
+      data.status = ctx.request.body.status
+      await repository.save(data);  
+      return ctx.body = {
+        code:201,
+        message:'新增成功'
+      };
+    } 
+    //修改
+    await repository.update(+classId, ctx.request.body);
+    const updated = await repository.findOneBy({id:classId}); 
+    if (updated) { 
+      return ctx.body = {
+        code:201,
+        message:'修改成功'
+      };
+    }
+    return ctx.body = {
+      code:501,
+      message:'修改失败'
+    };
+  }
 
-  // public static async deleteUser(ctx: Context) { 
-  //   const userId = ctx.request.body.id; 
-  //   const userRepository = getManager().getRepository(Class); 
-  //   await userRepository.delete({id:userId}); 
-  //   return ctx.body = {
-  //     success:201,
-  //     message:'删除成功',  
-  //   };
-  // }
+  public static async deleteClass(ctx: Context) { 
+    const classId = ctx.request.body.id; 
+    const repository = getManager().getRepository(Class); 
+    await repository.delete({id:classId}); 
+    return ctx.body = {
+      code:201,
+      message:'删除成功',  
+    };
+  }
 } 

@@ -4,6 +4,7 @@ import AuthController from './controllers/auth';
 import UserController from './controllers/user';
 import ArticleController from './controllers/article';
 import ClassController from './controllers/class';
+import MessageController from './controllers/message';
 const unprotectedRouter = new Router(); 
 
 // auth 相关的路由
@@ -23,5 +24,16 @@ protectedRouter.post('/blog/edit', ArticleController.updateArticle);
 protectedRouter.get('/blog/info', ArticleController.showArticleDetail);
 
 //class 相关路由
-protectedRouter.get('/class/list', ClassController.listClass); 
+protectedRouter.get('/class/list', ClassController.listClass);
+protectedRouter.post('/class/edit', ClassController.updateClass); 
+protectedRouter.delete('/class/del', ClassController.deleteClass);
+
+//message 相关路由 
+protectedRouter.post('/message/edit', MessageController.updateMessage);
+protectedRouter.get('/message/info', MessageController.showMessageDetail);
+
+export default {
+    unprotectedRouter,
+    protectedRouter
+};
 export { protectedRouter, unprotectedRouter };

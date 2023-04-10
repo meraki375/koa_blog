@@ -21,7 +21,7 @@ export default class UserController {
       .getMany();
     ctx.status = 200;
     ctx.body = { 
-      success:200,
+      code:200,
       message:'查询成功',
       count:articles.length,
       list:articlelist
@@ -30,10 +30,10 @@ export default class UserController {
 
   public static async showArticleDetail(ctx: Context) { 
     const articleRepository = getManager().getRepository(Article); 
-    const article = await articleRepository.findOneBy({id:ctx.params.id});
+    const article = await articleRepository.findOneBy({id:ctx.query.id});
     if (article) {
       ctx.body = { 
-        success:200,
+        code:200,
         message:'查询成功',
         article
       }
@@ -59,7 +59,7 @@ export default class UserController {
       newArticle.uid = ctx.request.body.uid; 
       await articleRepository.save(newArticle);  
       return ctx.body = {
-        success:201,
+        code:201,
         message:'新增成功'
       };
     } 
@@ -68,13 +68,13 @@ export default class UserController {
     const updatedArticle = await articleRepository.findOneBy({id:articleId}); 
     if (updatedArticle) { 
       return ctx.body = {
-        success:201,
+        code:201,
         message:'修改成功', 
         updatedArticle
       };
     }
     return ctx.body = {
-      success:501,
+      code:501,
       message:'修改失败', 
       updatedArticle
     };
@@ -85,7 +85,7 @@ export default class UserController {
   //   const articleRepository = getManager().getRepository(Article); 
   //   await articleRepository.delete({id:articleId}); 
   //   return ctx.body = {
-  //     success:201,
+  //     code:201,
   //     message:'删除成功',  
   //   };
   // }

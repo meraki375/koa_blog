@@ -19,7 +19,7 @@ export default class AuthController {
       } else if (await argon2.verify(user.password, ctx.request.body.password)) {
         ctx.status = 200;
         ctx.body = {
-          success:200,
+          code:200,
           message:'登录成功',
           token: jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '15d' }),
           user
@@ -43,7 +43,7 @@ export default class AuthController {
     const user = await userRepository.save(newUser); 
     ctx.status = 201;
     ctx.body = {
-      success:200,
+      code:200,
       message:'注册成功',
       token: jwt.sign({ id: user.id }, JWT_SECRET),
       user

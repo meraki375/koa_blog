@@ -22,7 +22,7 @@ export default class UserController {
       .getMany();
     ctx.status = 200;
     ctx.body = { 
-      success:200,
+      code:200,
       message:'登录成功',
       count:users.length,
       list:userlist
@@ -43,8 +43,6 @@ export default class UserController {
   public static async updateUser(ctx: Context) {
     const userRepository = getManager().getRepository(User);
     const userId = ctx.request.body.id;
-    console.log(userId);
-    
     //新增
     if (!userId) {
       const newUser = new User();
@@ -57,7 +55,7 @@ export default class UserController {
       newUser.password = await argon2.hash(ctx.request.body.password);
       const user = await userRepository.save(newUser);  
       return ctx.body = {
-        success:201,
+        code:201,
         message:'新增成功', 
         user
       };
@@ -67,13 +65,13 @@ export default class UserController {
     const updatedUser = await userRepository.findOneBy({id:userId}); 
     if (updatedUser) { 
       return ctx.body = {
-        success:201,
+        code:201,
         message:'修改成功', 
         updatedUser
       };
     }
     return ctx.body = {
-      success:501,
+      code:501,
       message:'修改失败', 
       updatedUser
     };
@@ -84,7 +82,7 @@ export default class UserController {
     const userRepository = getManager().getRepository(User); 
     await userRepository.delete({id:userId}); 
     return ctx.body = {
-      success:201,
+      code:201,
       message:'删除成功',  
     };
   }
