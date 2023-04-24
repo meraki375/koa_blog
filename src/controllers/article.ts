@@ -56,7 +56,8 @@ export default class UserController {
       newArticle.senderName = ctx.request.body.senderName;
       newArticle.status = ctx.request.body.status;
       newArticle.type = ctx.request.body.status;
-      newArticle.uid = ctx.request.body.uid; 
+      newArticle.uid = ctx.request.body.uid;
+      newArticle.cover_url = ctx.request.body.cover_url; 
       await articleRepository.save(newArticle);  
       return ctx.body = {
         code:201,

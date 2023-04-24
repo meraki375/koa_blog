@@ -23,6 +23,9 @@ export class Article {
   @Column()
   class: number;
 
+  @Column()
+  cover_url: string;
+
   @Column({
     length: 30
   })

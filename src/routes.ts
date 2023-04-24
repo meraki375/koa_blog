@@ -5,6 +5,8 @@ import UserController from './controllers/user';
 import ArticleController from './controllers/article';
 import ClassController from './controllers/class';
 import MessageController from './controllers/message';
+import NoteController from './controllers/note';
+import CosController from './controllers/cos';
 const unprotectedRouter = new Router(); 
 
 // auth 相关的路由
@@ -32,6 +34,13 @@ protectedRouter.delete('/class/del', ClassController.deleteClass);
 protectedRouter.post('/message/edit', MessageController.updateMessage);
 protectedRouter.get('/message/info', MessageController.showMessageDetail);
 
+//note 相关路由
+protectedRouter.get('/note/list', NoteController.listNote);
+protectedRouter.post('/note/edit', NoteController.updateNote); 
+protectedRouter.delete('/note/del', NoteController.deleteNote);
+
+// cos 相关路由
+protectedRouter.get('/getCOSToken', CosController.getCOSToken);
 export default {
     unprotectedRouter,
     protectedRouter
