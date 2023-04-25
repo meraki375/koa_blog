@@ -7,6 +7,7 @@ import ClassController from './controllers/class';
 import MessageController from './controllers/message';
 import NoteController from './controllers/note';
 import CosController from './controllers/cos';
+import WallpaperController from './controllers/wallpaper';
 const unprotectedRouter = new Router(); 
 
 // auth 相关的路由
@@ -41,8 +42,14 @@ protectedRouter.delete('/note/del', NoteController.deleteNote);
 
 // cos 相关路由
 protectedRouter.get('/getCOSToken', CosController.getCOSToken);
+
+//Wallpaper 相关路由
+protectedRouter.get('/wallpaper/list', WallpaperController.listWallpaper);
+protectedRouter.post('/wallpaper/edit', WallpaperController.updateWallpaper); 
+protectedRouter.delete('/wallpaper/del', WallpaperController.deleteWallpaper);
 export default {
     unprotectedRouter,
     protectedRouter
 };
+
 export { protectedRouter, unprotectedRouter };
