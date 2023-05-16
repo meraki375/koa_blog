@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn,CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { TextDecoder } from 'util';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Classes } from './classes';
 
 @Entity()
 export class Article {
@@ -14,14 +14,20 @@ export class Article {
   })
   title: string;
 
-  @Column({ type: "text"})
+  @Column({
+    default: '',
+    length: 100
+  })
+  introduce: string;
+
+  @Column({ type: "text" })
   centent: string;
 
-  @Column({default:0})
+  @Column({ default: 0 })
   readCnt: number;
 
   @Column()
-  class: number;
+  classId: number;
 
   @Column()
   cover_url: string;
@@ -29,10 +35,10 @@ export class Article {
   @Column({
     length: 30
   })
-  senderName: string;  
-  
+  senderName: string;
+
   @Column("double")
-  status: number; 
+  status: number;
 
   @CreateDateColumn()
   createAt: Date;
@@ -42,13 +48,15 @@ export class Article {
 
   @Column("double")
   type: number;
-  // @Column()
-  // registrationDate: string;
 
-  // @Column()
-  // accountId: string;
+  @ManyToOne(() => Classes, (classObj) => classObj.articles)
 
-  // @Column()
-  // role: string;
+  @JoinColumn({ name: 'classId' })
+  classObj: Classes;
+
+  // async getClassName(): Promise<string> {
+  //   await this.classObj?.reload();
+  //   return this.classObj?.name;
+  // }
+
 }
- 

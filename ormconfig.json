@@ -1,10 +1,10 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "106.55.224.41",
   "port": 3306,
-  "username": "root",
-  "password": "123456",
-  "database": "craica",
+  "username": "db_craica",
+  "password": "7nrHkMF6MnCxT3Zy",
+  "database": "db_craica",
   "synchronize": true,
   "entities": ["src/entity/*.ts"],
   "cli": {

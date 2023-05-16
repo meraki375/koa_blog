@@ -16,12 +16,12 @@ export default class ClassController {
           .take(pageParam.pageSize);
       
         if (pageParam.q) {
-            queryBuilder.where("wallpaper.title LIKE :param").setParameters({
-                param: `%${pageParam.q}%`
-            });
+          queryBuilder.where("wallpaper.title LIKE :param").setParameters({
+              param: `%${pageParam.q}%`
+          });
         }
         if (pageParam.type) {
-            queryBuilder.where("wallpaper.type LIKE :type").setParameters({
+          queryBuilder.where("wallpaper.type LIKE :type").setParameters({
                 type: `%${pageParam.type}%`
             });
           }

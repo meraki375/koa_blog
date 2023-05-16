@@ -12,15 +12,33 @@ export class User {
   password: string;
 
   @Column({
-    length: 30
+    length: 30,nullable: true
   })
   email: string; 
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string;
 
+  @Column({ nullable: true })
+  introductory: string;
+
+  @Column({ nullable: true })
+  address: string;
+
+  @Column({ nullable: true })
+  company: string;
+
+  @Column({ nullable: true })
+  department: string;
+
+  @Column({ nullable: true })
+  position: string;
+
+  @Column({ nullable: true })
+  hobby: string;
+
   @Column({
-    length: 11
+    length: 11,nullable: true
   })
   phone: string;
   
@@ -30,15 +48,7 @@ export class User {
   @CreateDateColumn()
   createAt: Date;
 
-  @Column("double",{default:0})
+  @Column("double",{default:0,nullable: true })
   sex: number;
-  // @Column()
-  // registrationDate: string;
-
-  // @Column()
-  // accountId: string;
-
-  // @Column()
-  // role: string;
 }
  
