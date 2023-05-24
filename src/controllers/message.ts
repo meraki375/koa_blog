@@ -22,6 +22,8 @@ export default class MessageController {
     const repository = getManager().getRepository(Message);
     await repository.update(+1, ctx.request.body);
     const updated = await repository.findOneBy({id:1}); 
+    console.log(updated);
+    
     if (updated) { 
       return ctx.body = {
         code:201,

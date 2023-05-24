@@ -8,6 +8,7 @@ import MessageController from './controllers/message';
 import NoteController from './controllers/note';
 import CosController from './controllers/cos';
 import WallpaperController from './controllers/wallpaper';
+import TabController from './controllers/tab';
 import PrivacyController from './controllers/privacy';
 const unprotectedRouter = new Router(); 
 
@@ -26,6 +27,7 @@ protectedRouter.delete('/api/system/user/del', UserController.deleteUser);
 protectedRouter.get('/api/blog/list', ArticleController.articleList);
 protectedRouter.post('/api/blog/edit', ArticleController.updateArticle);
 protectedRouter.get('/api/blog/info', ArticleController.showArticleDetail);
+protectedRouter.post('/api/blog/del', ArticleController.delArticle);
 
 //class 相关路由
 protectedRouter.get('/api/class/list', ClassController.listClass);
@@ -48,6 +50,11 @@ protectedRouter.get('/api/getCOSToken', CosController.getCOSToken);
 protectedRouter.get('/api/wallpaper/list', WallpaperController.listWallpaper);
 protectedRouter.post('/api/wallpaper/edit', WallpaperController.updateWallpaper); 
 protectedRouter.delete('/api/wallpaper/del', WallpaperController.deleteWallpaper);
+
+//class 相关路由
+protectedRouter.get('/api/tab/list', TabController.listTab);
+protectedRouter.post('/api/tab/edit', TabController.updateTab); 
+protectedRouter.delete('/api/tab/del', TabController.deleteTab);
 
 //privacy 相关路由 
 protectedRouter.post('/api/privacy/edit', PrivacyController.updatePrivacy);

@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
 import { Classes } from './classes';
+import { Tab } from './tab';
 
 @Entity()
 export class Article {
@@ -49,14 +50,21 @@ export class Article {
   @Column("double")
   type: number;
 
+  @Column({ nullable: true})
+  tabs: string;
+
   @ManyToOne(() => Classes, (classObj) => classObj.articles)
 
   @JoinColumn({ name: 'classId' })
   classObj: Classes;
 
-  // async getClassName(): Promise<string> {
-  //   await this.classObj?.reload();
-  //   return this.classObj?.name;
-  // }
+  @ManyToMany(() => Tab, tabObj => tabObj.articles)
+ 
+  @JoinTable({
+    name: 'article_tab_obj_tab',
+    joinColumn: { name: 'articleId' },
+    inverseJoinColumn: { name: 'tabId' }
+  })
+  tabObj: Tab[];
 
 }
