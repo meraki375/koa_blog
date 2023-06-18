@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable, OneToOne, RelationId } from 'typeorm';
 import { Classes } from './classes';
 import { Tab } from './tab';
+import { wl_Counter } from './wl_Counter';
+
 
 @Entity()
 export class Article {
@@ -22,10 +24,7 @@ export class Article {
   introduce: string;
 
   @Column({ type: "text" })
-  centent: string;
-
-  @Column({ default: 0 })
-  readCnt: number;
+  content: string;
 
   @Column()
   classId: number;
@@ -67,4 +66,7 @@ export class Article {
   })
   tabObj: Tab[];
 
+  @OneToOne(() => wl_Counter)
+  @JoinColumn()
+  counter: wl_Counter;
 }

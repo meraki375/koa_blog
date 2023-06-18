@@ -11,8 +11,11 @@ export class Note {
   @Column()
   cover_url: string; 
 
+  @Column({ type: 'varchar', length: 255, default: '' })
+  url: string;
+
   @Column()
-  centent: string; 
+  content: string; 
 
   @Column("double")
   status: number; 

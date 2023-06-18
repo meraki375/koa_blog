@@ -6,7 +6,7 @@ export class Message {
   id: number; 
   
   @Column({ type: "text"})
-  centent: string; 
+  content: string; 
 
   @CreateDateColumn()
   createAt: Date;

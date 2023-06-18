@@ -28,6 +28,7 @@ protectedRouter.get('/api/blog/list', ArticleController.articleList);
 protectedRouter.post('/api/blog/edit', ArticleController.updateArticle);
 protectedRouter.get('/api/blog/info', ArticleController.showArticleDetail);
 protectedRouter.post('/api/blog/del', ArticleController.delArticle);
+protectedRouter.post('/api/blog/status', ArticleController.toggleArticleStatus);
 
 //class 相关路由
 protectedRouter.get('/api/class/list', ClassController.listClass);
